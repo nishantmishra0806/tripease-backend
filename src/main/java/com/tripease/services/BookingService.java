@@ -47,14 +47,13 @@ public class BookingService {
         //bookingReq --> booking Entity
         Booking booking = BookingTransformer.bookingReqToBooking(bookingRequest,perKmRate);
         Booking savedBooking = bookingRepo.save(booking);
-        //setting customer booking
+
         availableCab.setAvailable(false);
         customer.get().getBookings().add(savedBooking);
 
-        //setting driver booking
         Driver driver = driverRepo.findDriverByCabId(availableCab.getCabId());
         driver.getBookings().add(savedBooking);
-
+        //This will automatically propagated to booking as customer and driver are parent entity of bookings
         Customer savedCustomer = customerRepo.save(customer.get());
         Driver savedDriver = driverRepo.save(driver);
 
