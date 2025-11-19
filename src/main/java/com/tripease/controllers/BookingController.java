@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookingController {
     BookingService bookingService ;
     public BookingController(BookingService bookingService) {
+
         this.bookingService = bookingService;
     }
 
