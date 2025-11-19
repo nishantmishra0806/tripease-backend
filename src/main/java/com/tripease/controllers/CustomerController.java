@@ -28,12 +28,12 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
-    @GetMapping("/get/gender/{gender}")
+    @GetMapping("/getby/gender/{gender}")
     public List<CustomerResponse> getAllByGender(@PathVariable Gender gender){
         return customerService.getAllByGender(gender);
     }
 
-    @GetMapping("/get/gender-and-age")
+    @GetMapping("/getby/gender-and-age")
     public List<CustomerResponse> getCustomerByGenderAndAgeGreaterThan(@RequestParam Gender gender , @RequestParam int age){
         return customerService.getCustomerByGenderAndAgeGreaterThan(gender,age);
     }
