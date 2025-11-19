@@ -21,7 +21,7 @@ public class LocationController {
     public ResponseEntity<?> updateLocation(@RequestBody LocationUpdateRequest request) {
         // basic validation
         if (request.getDriverId() == null || request.getLatitude() == null || request.getLongitude() == null) {
-            return ResponseEntity.badRequest().body("agentId, latitude and longitude are required");
+            return ResponseEntity.badRequest().body("driverId , latitude and longitude are required");
         }
         producer.send(request);
         return ResponseEntity.ok("Location received");
