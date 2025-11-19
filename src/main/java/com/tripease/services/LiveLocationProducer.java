@@ -20,12 +20,12 @@ public class LiveLocationProducer {
 
     public void send(LocationUpdateRequest req) {
         try {
-            String payload = objectMapper.writeValueAsString(req);
+            String message = objectMapper.writeValueAsString(req);
             // use agentId as key so the same agent goes to same partition
             String key = req.getDriverId() == null ? "unknown" : String.valueOf(req.getDriverId());
-            kafkaTemplate.send(KafkaConfig.LIVE_LOCATION_TOPIC, key, payload);
+            kafkaTemplate.send(KafkaConfig.LIVE_LOCATION_TOPIC, key, message);
         } catch (JsonProcessingException e) {
-            // log and swallow or rethrow depending on your logging strategy
+            //if error occured
             e.printStackTrace();
         }
     }
