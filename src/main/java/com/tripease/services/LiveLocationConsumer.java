@@ -19,7 +19,7 @@ public class LiveLocationConsumer {
     public void consume(String message) {
         try {
             LocationUpdateRequest req = objectMapper.readValue(message, LocationUpdateRequest.class);
-            System.out.println("Consumed location: agent=" + req.getDriverId() + " lat=" + req.getLatitude() + " lng=" + req.getLongitude());
+            System.out.println("Consumed location: driver =" + req.getDriverId() + " lat=" + req.getLatitude() + " long=" + req.getLongitude());
 
         } catch (Exception e) {
             e.printStackTrace();
