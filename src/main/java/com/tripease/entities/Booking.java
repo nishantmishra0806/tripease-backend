@@ -35,4 +35,16 @@ public class Booking {
 
     @UpdateTimestamp
     Date lastUpdateAt;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private Cab cab;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "driver_id")
+    private Driver driver;
 }
