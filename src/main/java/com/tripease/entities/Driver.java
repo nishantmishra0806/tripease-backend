@@ -1,5 +1,6 @@
 package com.tripease.entities;
 
+import com.tripease.security.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,7 +24,14 @@ public class Driver {
     private int driverAge;
 
     @Column(unique = true, nullable = false)
-    private String driverEmail;
+    private String email;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column( nullable = false)
+    private String password;
+
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn

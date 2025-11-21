@@ -3,14 +3,23 @@ package com.tripease.transformers;
 import com.tripease.dto.request.DriverRequest;
 import com.tripease.dto.response.DriverResponse;
 import com.tripease.entities.Driver;
+import com.tripease.security.Role;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class DriverTransformer {
 
-    public static Driver requestToDriver(DriverRequest driverRequest){
+    private final PasswordEncoder encoder;
+    public DriverTransformer(PasswordEncoder encoder) {
+        this.encoder = encoder;
+    }
+
+    public Driver requestToDriver(DriverRequest driverRequest){
         return Driver.builder()
                 .driverName(driverRequest.getName())
                 .driverAge(driverRequest.getAge())
-                .driverEmail(driverRequest.getEmail())
+                .email(driverRequest.getEmail())
+                .password(encoder.encode(driverRequest.getPassword()))
+                .role(Role.ROLE_DRIVER)
                 .build();
     }
 
@@ -19,7 +28,7 @@ public class DriverTransformer {
                 .driverId(driver.getDriverId())
                 .name(driver.getDriverName())
                 .age(driver.getDriverAge())
-                .email(driver.getDriverEmail())
+                .email(driver.getEmail())
                 .build();
     }
 }

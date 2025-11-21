@@ -18,10 +18,6 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PostMapping("/add")
-    public CustomerResponse addCustomer(@RequestBody CustomerRequest customerRequest){
-        return customerService.addCustomer(customerRequest);
-    }
 
     @GetMapping("/get/customer-id/{id}")
     public CustomerResponse getCustomer(@PathVariable Integer id){

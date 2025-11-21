@@ -5,11 +5,16 @@ import com.tripease.enums.Gender;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
+@Repository
 public interface CustomerRepo extends JpaRepository<Customer,Integer> {
     List<Customer>findByGender(Gender gender);
     @Query("select c from Customer c where c.gender = :gender AND c.age > :age")
     List<Customer>findByGenderAndAgeGreaterThan(@Param("gender") Gender gender, @Param("age") int age);
+
+    Optional<Customer> findByEmail(String email);
 }

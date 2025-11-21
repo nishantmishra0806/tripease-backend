@@ -13,4 +13,5 @@ public class DriverRequest {
     private String name;
     private int age;
     private String email;
+    private String password;
 }

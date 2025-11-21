@@ -17,9 +17,5 @@ public class DriverController {
         this.driverService = driverService;
     }
 
-    @PostMapping("/add")
-   public DriverResponse addDriver(@RequestBody DriverRequest driverRequest){
-       return driverService.addDriver(driverRequest);
-   }
 
 }

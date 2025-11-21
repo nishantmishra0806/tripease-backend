@@ -8,6 +8,7 @@ import com.tripease.exceptions.CustomerNotFoundException;
 import com.tripease.repository.CustomerRepo;
 import com.tripease.transformers.CustomerTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,10 +19,13 @@ import java.util.Optional;
 public class CustomerService {
     @Autowired
     CustomerRepo customerRepo;
+    @Autowired
+    PasswordEncoder encoder;
 
-    public CustomerResponse addCustomer(CustomerRequest customerRequest) {
+    public CustomerResponse register(CustomerRequest customerRequest) {
         //ReqDTO --> entity conversion
-        Customer customer = CustomerTransformer.customerRequestToCustomer(customerRequest);
+        CustomerTransformer transformer = new CustomerTransformer(encoder);
+        Customer customer = transformer.customerRequestToCustomer(customerRequest);
         //save entity to DB
         Customer savedCustomer= customerRepo.save(customer);
         //entity --> ResponseDTO conversion

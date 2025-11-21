@@ -1,6 +1,7 @@
 package com.tripease.entities;
 
 import com.tripease.enums.Gender;
+import com.tripease.security.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.ArrayList;
@@ -24,6 +25,12 @@ public class Customer {
 
     @Column(unique = true, nullable = false)
     private String email;
+
+    @Column( nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role  role;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
